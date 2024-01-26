@@ -65,9 +65,7 @@ export default function Landing() {
 
   return (
     <>
-      {isLoading?( <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}><Flex align="center" justify="center">
-          <ClimbingBoxLoader />
-        </Flex></Stack> ):(
+ 
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -123,7 +121,7 @@ export default function Landing() {
       </Flex>
         
     </Stack>
-    )};
+  
     </>
   )
 }
