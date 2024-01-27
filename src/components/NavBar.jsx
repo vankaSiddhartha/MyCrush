@@ -60,8 +60,8 @@ export default function NavBar() {
     />
         <Box
          
-          w="1000PX"
-          h="150px"
+         w={{ base: '100%', md: '1000px' }} // Adjust the width for mobile and larger screens
+      h={{ base: '100px', md: '150px' }} // Adjust the height for mobile and larger screens
           margin={4}
           background={`url(${"https://firebasestorage.googleapis.com/v0/b/anits-fest.appspot.com/o/finalbro.svg?alt=media&token=e3b404c6-809a-4185-9982-39cbbc4d9812"})`}
           backgroundSize="contain"
