@@ -14,6 +14,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@react-spring/web": "^9.5.5",
     "firebase": "^10.7.2",
     "framer-motion": "^11.0.3",
     "react": "^18.2.0",
@@ -21,6 +22,7 @@
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.21.3",
     "react-spinners": "^0.13.8",
+    "react-tinder-card": "^1.6.4",
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {

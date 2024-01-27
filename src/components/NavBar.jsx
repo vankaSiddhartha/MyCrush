@@ -91,9 +91,9 @@ export default function NavBar() {
         {/* Replace these Box components with your actual navigation links */}
        
         <Stack align={'flex-start'}>
-  <ListHeader>Support</ListHeader>
-  <Link to="/help-center">Help Center</Link>
-  <Link to="/terms-of-service">Terms of Service</Link>
+  <ListHeader>Menu</ListHeader>
+  <Link to="/help-center">Home</Link>
+  <Link to="/dating">Dating</Link>
   <Link to="/privacy-policy">Privacy Policy</Link>
    <ListHeader>Company</ListHeader>
   <Link to="/about">About</Link>
