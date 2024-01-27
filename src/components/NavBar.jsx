@@ -88,7 +88,7 @@ export default function NavBar() {
       <DrawerCloseButton />
       <DrawerHeader bg={'#FF4E4C'}>Menu</DrawerHeader>
       <DrawerBody bg={'#FF4E4C'}>
-        {/* Replace these Box components with your actual navigation links */}
+      
        
         <Stack align={'flex-start'}>
   <ListHeader>Menu</ListHeader>

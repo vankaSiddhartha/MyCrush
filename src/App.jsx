@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Home from './home/Home';
 import Advanced from './tinderModule/Swipe';
 import NavBar from './components/NavBar';
+import Omegle from './Omegle/Omegle';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <Route path='/' element={isLogin?(<Home/>):(<Lading/>)} />
         <Route path='/auth' element={isLogin?(<Home/>):(<Auth />)} />
          <Route path='/dating' element={<Advanced/>} />
-
+        <Route path='/omegle' element={<Omegle/>} />
           <Route
           path='/home'
         
