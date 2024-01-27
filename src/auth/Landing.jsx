@@ -42,7 +42,6 @@ export default function Landing() {
         localStorage.setItem("profile",user.photoURL)
         localStorage.setItem("uid",user.uid)
         
-
       
        
 

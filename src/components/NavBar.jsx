@@ -1,105 +1,117 @@
-'use client'
-
 import {
-  Box,
   Flex,
-  Avatar,
-  HStack,
-  Text,
-  IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
+  IconButton,
   useDisclosure,
-  useColorModeValue,
-  Stack,
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+  Drawer,
+  DrawerOverlay,
+   Stack,
+  DrawerContent,
+  DrawerCloseButton,
+  Icon,
+    CloseButton,
+  DrawerHeader,
+  DrawerBody,
+  Box,
+} from '@chakra-ui/react';
+
+import { Link, useNavigation } from 'react-router-dom';
+import { Text } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 
-const Links = ['Dashboard', 'Projects', 'Team']
-
-const NavLink = (props) => {
-  const { children } = props
+const ListHeader = ({ children }) => {
 
   return (
-    <Box
-      as="a"
-      px={2}
-      py={1}
-      rounded={'md'}
-      _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
-      }}
-      href={'#'}>
+    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
       {children}
-    </Box>
+    </Text>
   )
 }
-
 export default function NavBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate()
+   function click(){
+        
+     navigate("/contact")
+   }
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const flexStyles = {
+   
+    px: 4,
+    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "none", // Set boxShadow to none explicitly
+  };
+
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <IconButton
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
-            onClick={isOpen ? onClose : onOpen}
-          />
-          <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </HStack>
-          </HStack>
-          <Flex alignItems={'center'}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}>
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu>
-          </Flex>
-        </Flex>
+      <Flex bg={'#FF4E4C'} position={'fixed'} width={'100%'}{...flexStyles} >
+        <IconButton
+      icon={<HamburgerIcon fontSize="24px" />} // Adjust fontSize for the icon size
+      onClick={onOpen}
+      variant="ghost"
+      height={12} // Increase the height to change the overall button size
+      width={12} // Increase the width to change the overall button size
+      color="current"
+      aria-label="Menu"
+    />
+        <Box
+         
+          w="1000PX"
+          h="150px"
+          margin={4}
+          background={`url(${"https://firebasestorage.googleapis.com/v0/b/anits-fest.appspot.com/o/finalbro.svg?alt=media&token=e3b404c6-809a-4185-9982-39cbbc4d9812"})`}
+          backgroundSize="contain"
+          backgroundRepeat="no-repeat"
+          backgroundPosition="center"
+        >
+        </Box>
+    <Button
+          display={{ base: 'none', md: 'inline-flex' }}
+          bg="black"
+          color="white"
+          marginLeft={4}
+          onClick={click}
+          _hover={{ bg: 'gray.800' }}
+          rounded="full"
+        >
+          Beta Tester
+        </Button>
+      </Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
-      </Box>
+ <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+  <DrawerOverlay>
+    <DrawerContent>
+      <DrawerCloseButton />
+      <DrawerHeader bg={'#FF4E4C'}>Menu</DrawerHeader>
+      <DrawerBody bg={'#FF4E4C'}>
+        {/* Replace these Box components with your actual navigation links */}
+       
+        <Stack align={'flex-start'}>
+  <ListHeader>Support</ListHeader>
+  <Link to="/help-center">Help Center</Link>
+  <Link to="/terms-of-service">Terms of Service</Link>
+  <Link to="/privacy-policy">Privacy Policy</Link>
+   <ListHeader>Company</ListHeader>
+  <Link to="/about">About</Link>
+    <Link to={"/blogs"}>Company Blogs</Link>
+  <Link to="/careers">Careers</Link>
+  <Link to="/contact">Contact</Link>
+    <ListHeader>Follow Us</ListHeader>
+  <a href="https://twitter.com/gossylovesyou">Twitter</a>
+  <a href="https://www.instagram.com/gossylovesyou/">Instagram</a>
+  <a href="https://www.linkedin.com/company/gossy-the-perfect-social-app/about/?viewAsMember=true">LinkedIn</a>
 
-      <Box p={4}>Main Content Here</Box>
+</Stack>
+        
+      </DrawerBody>
+    </DrawerContent>
+  </DrawerOverlay>
+</Drawer>
+
     </>
-  )
+  );
 }
