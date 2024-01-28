@@ -70,6 +70,7 @@ export default function Landing() {
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+      
             <Text
               as={'span'}
               position={'relative'}
@@ -83,18 +84,14 @@ export default function Landing() {
               
                 zIndex: -1,
               }}>
-              MyCrush❤️
+              UniVibe❤️
             </Text>
             <br />{' '}
             <Text color={'pink.400'} as={'span'}>
-              Love at first click-anonymously😜
+              Elevate Your College Experience – Learn, Enjoy, Socialize!😜
             </Text>{' '}
           </Heading>
-          <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            
-🚀 Welcome to our dating universe! Explore thrilling crush connections, spill your heart out in our confession zone, and ignite sparks with our seamless dating feature. 🌟 Unleash the power of emotions, connections, and unforgettable dates – all in one place! 
-          </Text>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+              <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
               rounded={'full'}
               bg={'blue.400'}
@@ -107,6 +104,13 @@ export default function Landing() {
             </Button>
             <Button rounded={'full'} onClick={handleClick} >Login Account</Button>
           </Stack>
+          <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
+            
+🚀 Welcome to Univibe: Redefining College Bliss! 🌟
+
+Embark on an extraordinary college adventure with Univibe! 🎓💫 Immerse yourself in enlightening discussions in our vibrant Voice Rooms, share your innermost thoughts anonymously in the Confessions Courts, and experience the thrill of connecting through Anonymous Crush Tags. 🗣️💖 Discover the power of authentic expressions, make everlasting connections, and weave unforgettable memories throughout your college journey. 🚀✨ At Univibe, every feature is crafted to enhance your experience and make your college years truly exceptional. Welcome to a world where emotions, connections, and unforgettable moments come together seamlessly. 🌈🎉 
+          </Text>
+          
         </Stack>
       </Flex>
       <Flex flex={1}>

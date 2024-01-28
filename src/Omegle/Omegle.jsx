@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import NavBar from '../components/NavBar';
 
 function randomID(len) {
   let result = '';
@@ -22,6 +23,7 @@ export function getUrlParams(
 }
 
 export default function App() {
+ 
   const roomID = getUrlParams().get('roomID') || randomID(5);
   let myMeeting = async (element) => {
     const appID = 798902303;
@@ -29,7 +31,9 @@ export default function App() {
     const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID,  randomID(5),  randomID(5));
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-
+     const roomState = await zg.getRoomState(roomID);
+    const userCount = roomState.userCount;
+    console.log(`Number of users in the room: ${userCount}`);
     zp.joinRoom({
       container: element,
 sharedLinks: [
@@ -49,10 +53,15 @@ sharedLinks: [
   };
 
   return (
+    <>
+   
     <div
+  
       className="myCallContainer"
       ref={myMeeting}
       style={{ width: '100vw', height: '100vh' }}
-    ></div>
+    >
+    </div>
+     </>
   );
 }

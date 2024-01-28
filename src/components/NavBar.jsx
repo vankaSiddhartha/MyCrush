@@ -48,7 +48,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Flex bg={'#FF4E4C'} position={'fixed'} width={'100%'}{...flexStyles} >
+      <Flex bg={'#FF4E4C'} position={'fixed'} width={'100%'}{...flexStyles}    zIndex="1000">
         <IconButton
       icon={<HamburgerIcon fontSize="24px" />} // Adjust fontSize for the icon size
       onClick={onOpen}

@@ -1,14 +1,14 @@
 import React, { useMemo, useRef, useEffect, useState } from 'react';
 import TinderCard from 'react-tinder-card';
 import { database } from '../firebase';
-import { ref, get,limitToFirst } from 'firebase/database';
+import { ref, get,limitToFirst ,query} from 'firebase/database';
 
 function Advanced() {
   const [user, setUser] = useState([]);
   useEffect(() => {
     const userRef = ref(database, 'users');
 
-    get(query(userRef,limitToFirst(5)))
+    get(query(userRef,limitToFirst(2)))
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
