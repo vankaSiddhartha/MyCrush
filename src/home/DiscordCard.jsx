@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { useEffect } from 'react'
 
-import {ZegoExpressEngine} from 'zego-express-engine-webrtc'
+
 const DiscordCard = (props) => {
 
      const handleButtonClick = () => {

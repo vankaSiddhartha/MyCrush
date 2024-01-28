@@ -31,9 +31,7 @@ export default function App() {
     const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID,  randomID(5),  randomID(5));
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
-     const roomState = await zg.getRoomState(roomID);
-    const userCount = roomState.userCount;
-    console.log(`Number of users in the room: ${userCount}`);
+    
     zp.joinRoom({
       container: element,
 sharedLinks: [
