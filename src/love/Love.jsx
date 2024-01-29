@@ -7,6 +7,10 @@ import {
   CloseButton,
   Flex,
   HStack,
+    useColorMode,
+     Button,
+       useBreakpointValue,
+
   VStack,
   Icon,
   useColorModeValue,
@@ -14,16 +18,13 @@ import {
   Drawer,
   DrawerContent,
   useDisclosure,
+  MenuDivider,
+  MenuItem,
   Menu,
   MenuButton,
-  useColorMode,
-    Button,
-  MenuItem,
   MenuList,
-  useBreakpoint,
-  useBreakpointValue,
+  background,
 } from '@chakra-ui/react'
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import {
   FiHome,
   FiTrendingUp,
@@ -34,14 +35,13 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
-import React, { useMemo, useRef, useEffect, useState } from 'react';
-import DiscordCard from './DiscordCard'
-import { ref, get,limitToFirst ,query} from 'firebase/database';
-import { database } from '../firebase';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import LoveInMenu from './LoveInMenu'
+
 import { FaHeart } from "react-icons/fa";
 import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+
 
 
 const LinkItems = [
@@ -52,8 +52,7 @@ const LinkItems = [
   { name: 'Settings', icon: FiSettings,link:'' },
 ]
 
-    const SidebarContent = ({ onClose, ...rest }) => {
-      
+const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
@@ -74,7 +73,6 @@ const LinkItems = [
         <NavItem key={link.name} icon={link.icon} link={link.link}>
           {link.name}
         </NavItem>
-         // <Link  icon ={link.icon} to={link.link}>{link.name}</Link>
       ))}
     </Box>
   )
@@ -84,7 +82,7 @@ const NavItem = ({ icon, children,link, ...rest }) => {
   return (
     <Box
       as="a"
-      href= {link}
+      href={link}
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}>
       <Flex
@@ -114,7 +112,6 @@ const NavItem = ({ icon, children,link, ...rest }) => {
     </Box>
   )
 }
-
 const MobileNav = ({ onOpen, ...rest }) => {
    const profile = localStorage.getItem("profile")
     const name = localStorage.getItem("name")
@@ -189,74 +186,30 @@ const MobileNav = ({ onOpen, ...rest }) => {
   )
 }
 
-const SidebarWithHeader = () => {
-  const [user, setUser] = useState([]);
-  const [loading,setLoading] = useState(false)
-  useEffect(() => {
-    const userRef = ref(database, 'servers');
-    setLoading(true)
-    get(query(userRef,limitToFirst(2)))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
-          const userList = Object.entries(userData).map(([userId, userDetails]) => ({
-            id: userDetails.id,
-            name: userDetails.name,
-            profile: userDetails.profile,
-            vlink: userDetails.vlink,
-            live: userDetails.live,
-            dis: userDetails.dis,
-        
-          }));
-          setUser(userList);
-          console.log(userList)
-          setLoading(false)
-        } else {
-          console.log("No data");
-          setLoading(false)
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false)
-      });
-  }, []);
+const Love = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-   <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      {loading ? (
-         <Flex align="center" justify="center" minH="100vh">
-      <ClimbingBoxLoader color="#36d7b7" />
-    </Flex>
-      ) : (
-        <>
-          <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
-          <Drawer
-            isOpen={isOpen}
-            placement="left"
-            onClose={onClose}
-            returnFocusOnClose={false}
-            onOverlayClick={onClose}
-            size="full"
-          >
-            <DrawerContent>
-              <SidebarContent onClose={onClose} />
-            </DrawerContent>
-          </Drawer>
-          {/* mobilenav */}
-          <MobileNav onOpen={onOpen} />
-          <Box ml={{ base: 0, md: 60 }} p="4">
-            <Flex flexWrap="wrap" gap={10}>
-              {user.map((classData, index) => (
-                <DiscordCard key={index} id={classData} />
-              ))}
-            </Flex>
-          </Box>
-        </>
-      )}
+    <Box minH="100vh" bg={useColorModeValue('#FF167C', '#FF167C') }>
+      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <Drawer
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        returnFocusOnClose={false}
+        onOverlayClick={onClose}
+        size="full">
+        <DrawerContent>
+          <SidebarContent onClose={onClose} />
+        </DrawerContent>
+      </Drawer>
+      {/* mobilenav */}
+      <MobileNav onOpen={onOpen} />
+      <Box ml={{ base: 0, md: 60 }} p="4">
+       <LoveInMenu/>
+      </Box>
     </Box>
   )
 }
 
-export default SidebarWithHeader
+export default Love

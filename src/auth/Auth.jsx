@@ -49,7 +49,7 @@ export default function Auth() {
     const uid = localStorage.getItem('uid');
 
     const databaseInstance = getDatabase();
-    const dbRef = ref(databaseInstance, `users/${uid}`);
+    const dbRef = ref(databaseInstance, `users/${rollNum}`);
 
     try {
       await set(dbRef, {

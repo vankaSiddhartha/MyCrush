@@ -6,6 +6,9 @@ import Advanced from './tinderModule/Swipe';
 import Omegle from './Omegle/Omegle';
 import Landing from './auth/Landing';
 import Auth from './auth/Auth';
+import Love from './love/Love';
+import Match from './love/Match';
+
 
 function App() {
   const isLogin = localStorage.getItem("isLogin");
@@ -20,6 +23,8 @@ function App() {
           <Route path='/dating' element={<Advanced />} />
           <Route path='/omegle' element={<Omegle />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/love' element={<Love/>}/>
+          <Route path='/match' element={<Match/>}/>
         </Routes>
       </Router>
     </ChakraProvider>

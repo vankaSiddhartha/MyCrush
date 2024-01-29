@@ -48,40 +48,31 @@ export default function NavBar() {
 
   return (
     <>
-      <Flex bg={'#FF4E4C'} position={'fixed'} width={'100%'}{...flexStyles}    zIndex="1000">
-        <IconButton
-      icon={<HamburgerIcon fontSize="24px" />} // Adjust fontSize for the icon size
-      onClick={onOpen}
-      variant="ghost"
-      height={12} // Increase the height to change the overall button size
-      width={12} // Increase the width to change the overall button size
-      color="current"
-      aria-label="Menu"
-    />
-        <Box
-         
-         w={{ base: '100%', md: '1000px' }} // Adjust the width for mobile and larger screens
-      h={{ base: '100px', md: '150px' }} // Adjust the height for mobile and larger screens
-          margin={4}
-          background={`url(${"https://firebasestorage.googleapis.com/v0/b/anits-fest.appspot.com/o/finalbro.svg?alt=media&token=e3b404c6-809a-4185-9982-39cbbc4d9812"})`}
-          backgroundSize="contain"
-          backgroundRepeat="no-repeat"
-          backgroundPosition="center"
-        >
-        </Box>
-    <Button
-          display={{ base: 'none', md: 'inline-flex' }}
-          bg="black"
-          color="white"
-          marginLeft={4}
-          onClick={click}
-          _hover={{ bg: 'gray.800' }}
-          rounded="full"
-        >
-          Beta Tester
-        </Button>
-      </Flex>
+       <Flex
+      bg={'#FF4E4C'}
+      position={'fixed'}
+      width={'100%'}
+      zIndex="1000"
+      {...flexStyles}
+    >
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        w={{ base: '100%', md: '1000px' }}
+        h={{ base: '150px', md: '200px' }}
+        marginLeft={{ base: '24', md: '0' }}
+        marginRight={{ base: '0', md: '30' }}
+        background={`url("https://firebasestorage.googleapis.com/v0/b/anits-fest.appspot.com/o/finalbro.svg?alt=media&token=e3b404c6-809a-4185-9982-39cbbc4d9812")`}
+        backgroundSize="contain"
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+      >
+        {/* Content inside the Box, if any */}
+      </Box>
 
+
+    </Flex>
  <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
   <DrawerOverlay>
     <DrawerContent>
