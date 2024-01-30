@@ -19,15 +19,17 @@ export default function Landing() {
   const [isLoading, setIsLoading] = useState(false);
 
   function isBusinessEmail(email) {
-    const businessDomains = ['company1.com', 'company2.com', 'businessdomain.com', 'anits.edu.in', 'gmail.com'];
+    const businessDomains = [ 'anits.edu.in', 'nitw.ac.in','gitam.edu'];
     const [, domain] = email.split('@');
 
     if (!businessDomains.includes(domain)) {
       window.alert("Use college mail");
+      setIsLoading(false)
     } else {
       localStorage.setItem("email", email);
-     
+      setIsLoading(false)
        navigate("/auth")
+      
       
     }
   }
@@ -64,9 +66,9 @@ export default function Landing() {
 
   return (
     <>
- 
+  {isLoading?( <Flex align="center" justify="center" minH="100vh">   <ClimbingBoxLoader color="#36d7b7" /></Flex>):(<Flex></Flex>)}
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-        
+       
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -124,7 +126,7 @@ Embark on an extraordinary college adventure with Univibe! 🎓💫 Immerse your
       </Flex>
         
     </Stack>
-  
+
     </>
   )
 }
