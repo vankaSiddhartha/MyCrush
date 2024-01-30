@@ -8,6 +8,7 @@ import Landing from './auth/Landing';
 import Auth from './auth/Auth';
 import Love from './love/Love';
 import Match from './love/Match';
+import CreatePrivateRoom from './home/CreatePrivateRoom';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/love' element={<Love/>}/>
           <Route path='/match' element={<Match/>}/>
+          <Route path='/custumRoom'element={<CreatePrivateRoom/>}/>
         </Routes>
       </Router>
     </ChakraProvider>

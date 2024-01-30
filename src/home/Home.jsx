@@ -38,17 +38,18 @@ import React, { useMemo, useRef, useEffect, useState } from 'react';
 import DiscordCard from './DiscordCard'
 import { ref, get,limitToFirst ,query,getDatabase} from 'firebase/database';
 import { database } from '../firebase';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaHome } from "react-icons/fa";
 import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import swal from 'sweetalert';
-
+import {  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, FormControl, FormLabel } from '@chakra-ui/react';
 
 const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
+  {name :'Create Room',icon:FaHome,link:'/custumRoom'}
   
 ]
 
@@ -118,7 +119,16 @@ const NavItem = ({ icon, children,link, ...rest }) => {
 const MobileNav = ({ onOpen, ...rest }) => {
    const profile = localStorage.getItem("profile")
     const name = localStorage.getItem("name")
+      const { isOpen, onOpen: onRoomOpen, onClose: onRoomClose } = useDisclosure();
      const { colorMode, toggleColorMode } = useColorMode()
+       const handleCreateRoom = () => {
+        const randomString = Math.random().toString(36).substring(7);
+          const link = `https://mycrush.vercel.app/omegle?roomID=${randomString}`;
+    // Replace this with your actual logic for creating a room
+    console.log('Room created!');
+     window.location.href = link;
+    onRoomClose(); // Close the modal after creating the room
+  };
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -151,6 +161,37 @@ const MobileNav = ({ onOpen, ...rest }) => {
  <Button size={useBreakpointValue({base:'sm',md:'md'})} marginRight={useBreakpointValue({ base: '2', md: '0' })} onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               </Button>
+                <Button
+          size={useBreakpointValue({ base: 'sm', md: 'md' })}
+          marginRight={useBreakpointValue({ base: '2', md: '0' })}
+          onClick={onRoomOpen}
+        >
+          Create Room
+        </Button>
+
+        {/* Modal for creating a private room */}
+        <Modal isOpen={isOpen} onClose={onRoomClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Room is created</ModalHeader>
+            <ModalBody>
+              
+              <Box>
+               
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={handleCreateRoom}>
+               Open
+              </Button>
+              <Button variant="ghost" onClick={onRoomClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+   
 
         <Flex alignItems={'center'}>
           <Menu>
@@ -190,6 +231,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
 }
 
 const SidebarWithHeader = () => {
+
+  const [roomName, setRoomName] = useState('');
   const [user, setUser] = useState([]);
   const [loading,setLoading] = useState(false)
         const myRollnumber = localStorage.getItem('rollNumber');
@@ -268,5 +311,6 @@ const SidebarWithHeader = () => {
     </Box>
   )
 }
+
 
 export default SidebarWithHeader
