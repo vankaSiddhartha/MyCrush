@@ -36,20 +36,20 @@ import {
 } from 'react-icons/fi'
 import React, { useMemo, useRef, useEffect, useState } from 'react';
 import DiscordCard from './DiscordCard'
-import { ref, get,limitToFirst ,query} from 'firebase/database';
+import { ref, get,limitToFirst ,query,getDatabase} from 'firebase/database';
 import { database } from '../firebase';
 import { FaHeart } from "react-icons/fa";
 import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+import swal from 'sweetalert';
 
 
 const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
-  { name: 'Favourites', icon: FiStar, link:'/'},
-  { name: 'Settings', icon: FiSettings,link:'' },
+  
 ]
 
     const SidebarContent = ({ onClose, ...rest }) => {
@@ -192,7 +192,17 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const SidebarWithHeader = () => {
   const [user, setUser] = useState([]);
   const [loading,setLoading] = useState(false)
+        const myRollnumber = localStorage.getItem('rollNumber');
+        const databaseInstance = getDatabase();
+  
   useEffect(() => {
+      const keyRef = ref(databaseInstance, `match/${myRollnumber}`);
+   get(keyRef).then((snapshot)=>{
+      if(snapshot.exists()){
+    swal("Hey dont forget you got a match")
+   }
+   })
+  
     const userRef = ref(database, 'servers');
     setLoading(true)
     get(query(userRef,limitToFirst(2)))

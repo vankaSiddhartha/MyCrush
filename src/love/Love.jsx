@@ -48,8 +48,7 @@ const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
-  { name: 'Favourites', icon: FiStar, link:'/'},
-  { name: 'Settings', icon: FiSettings,link:'' },
+  
 ]
 
 const SidebarContent = ({ onClose, ...rest }) => {

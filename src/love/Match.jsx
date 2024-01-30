@@ -30,6 +30,8 @@ export default function Match() {
           setUserDetailsList(userDetailsList);
           console.log(userDetailsList)
           setLoading(false)
+        }else{
+           setLoading(false)
         }
       } catch (error) {
         setLoading(false)

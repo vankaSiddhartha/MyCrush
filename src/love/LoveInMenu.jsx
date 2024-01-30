@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { getDatabase, ref, get, set } from 'firebase/database';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
+import { Resend } from 'resend';
 import swal from 'sweetalert';
 
 const LoveInMenu = () => {
@@ -33,16 +34,24 @@ const LoveInMenu = () => {
     const userRef = ref(databaseInstance, link);
     const sendRef = ref(databaseInstance, sendlink);
 
+
     get(userRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           console.log('Matched');
+          get(ref(databaseInstance,`users/${crushRollNumber}/email`))
+          .then((snapshot)=>{
+            console.log(snapshot.val())
+       
+          
+          })
+          
           swal('You got matched. Check the match section to know who matched you');
           set(ref(databaseInstance, matchedLinkA), {
-            status: matchedLinkA,
+            status: crushRollNumber,
           }).then(() => {
             set(ref(databaseInstance, matchedLinkB), {
-              status: matchedLinkB,
+              status: myRollnumber,
             });
           });
           console.log('Data added to the database');
