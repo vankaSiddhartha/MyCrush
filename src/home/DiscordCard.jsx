@@ -12,16 +12,21 @@ import {
   useColorModeValue,
   Button,
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
-
+import swal from 'sweetalert';
 
 const DiscordCard = (props) => {
 
+
      const handleButtonClick = () => {
- 
-    // Replace '/your-link' with the actual link you want to navigate to
-    const linkToGo = props.id.vlink
-    window.location.href = linkToGo;
+          const currentHour = new Date().toLocaleTimeString('en-US', { hour12: false, timeZone: 'Asia/Kolkata' }).split(':')[0];
+
+    if (parseInt(currentHour, 10) <= 20) {
+  swal("Clubs will be open at 8PM bro, Join at 8pm");
+} else {
+  // Replace '/your-link' with the actual link you want to navigate to
+  const linkToGo = props.id.vlink;
+  window.location.href = linkToGo;
+}
   };
     const profile = localStorage.getItem("profile")
    

@@ -253,6 +253,7 @@ const SidebarWithHeader = () => {
       if(snapshot.exists()){
     swal("Hey dont forget you got a match")
    }
+    
    })
 
     const userRef = ref(database, 'servers');
