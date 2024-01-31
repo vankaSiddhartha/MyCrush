@@ -66,6 +66,8 @@ const LoveInMenu = () => {
             console.error('Error adding data to the database:', error.message);
           }
         }
+      }).then(()=>{
+        swal("Successful❤️")
       })
       .catch((error) => {
         console.error('Error reading data from the database:', error.message);
