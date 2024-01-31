@@ -31,7 +31,7 @@ export default function Auth() {
     setIsLoading(true);
 
     const sex = gender;
-    const rollNum = rollNumber;
+    const rollNum = rollNumber.trim();
     const university = college;
 
     if (rollNum === "" || sex === "" || university === "") {

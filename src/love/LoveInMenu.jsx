@@ -23,15 +23,16 @@ const LoveInMenu = () => {
 
     if (crushRollNumber === '') {
       setIsLoading(false);
+     
       return;
     }
 
-    const myRollnumber = localStorage.getItem('rollNumber');
+    const myRollnumber = localStorage.getItem('rollNumber').trim();
     const databaseInstance = getDatabase();
-    const link = `crush/${crushRollNumber}/${myRollnumber}`;
-    const sendlink = `crush/${myRollnumber}/${crushRollNumber}`;
-    const matchedLinkA = `match/${myRollnumber}/${crushRollNumber}`;
-    const matchedLinkB = `match/${crushRollNumber}/${myRollnumber}`;
+    const link = `crush/${crushRollNumber.trim()}/${myRollnumber.trim()}`;
+    const sendlink = `crush/${myRollnumber.trim()}/${crushRollNumber.trim()}`;
+    const matchedLinkA = `match/${myRollnumber.trim()}/${crushRollNumber.trim()}`;
+    const matchedLinkB = `match/${crushRollNumber.trim()}/${myRollnumber.trim()}`;
     const userRef = ref(databaseInstance, link);
     const sendRef = ref(databaseInstance, sendlink);
 
@@ -40,22 +41,23 @@ const LoveInMenu = () => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           console.log('Matched');
-          get(ref(databaseInstance,`users/${crushRollNumber}/email`))
+          get(ref(databaseInstance,`users/${crushRollNumber.trim()}/email`))
           .then((snapshot)=>{
             console.log(snapshot.val())
        
           
-          })
+          }).then(()=>{
           
-          swal('You got matched. Check the match section to know who matched you');
+        
           set(ref(databaseInstance, matchedLinkA), {
-            status: crushRollNumber,
+            status: crushRollNumber.trim(),
           }).then(() => {
             set(ref(databaseInstance, matchedLinkB), {
               status: myRollnumber,
             });
           });
-          console.log('Data added to the database');
+           swal('You got matched. Check the match section to know who matched you');
+           })
         } else {
           try {
             set(sendRef, {
@@ -75,6 +77,7 @@ const LoveInMenu = () => {
       .finally(() => {
         setIsLoading(false);
       });
+      
   };
 
   return (
@@ -110,7 +113,7 @@ const LoveInMenu = () => {
             <FormLabel>Crush Roll number</FormLabel>
             <Input
               placeholder="Roll number"
-              value={crushRollNumber}
+              value={crushRollNumber.trim()}
               onChange={(e) => setCrushRollNumber(e.target.value)}
             />
           </FormControl>
