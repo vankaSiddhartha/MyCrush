@@ -49,7 +49,7 @@ const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
-  {name :'Create Room',icon:FaHome,link:'/custumRoom'}
+
   
 ]
 
