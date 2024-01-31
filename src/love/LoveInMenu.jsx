@@ -67,7 +67,7 @@ const LoveInMenu = () => {
           }
         }
       }).then(()=>{
-        swal("Successful❤️")
+        swal("Successful❤️","We hope you got match with your crush")
       })
       .catch((error) => {
         console.error('Error reading data from the database:', error.message);

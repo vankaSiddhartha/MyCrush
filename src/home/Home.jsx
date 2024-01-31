@@ -252,6 +252,12 @@ const SidebarWithHeader = () => {
    get(keyRef).then((snapshot)=>{
       if(snapshot.exists()){
     swal("Hey dont forget you got a match")
+   }else{
+    swal({
+      text:"Ignore this message if you dont register to CrushMatch",
+      title: "No responce from your crush but no worries, increse your crush list to increse the probability to get valentinens date"
+    })
+
    }
     
    })
