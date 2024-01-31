@@ -15,7 +15,7 @@ export default function CreatePrivateRoom() {
   return (
     <div>
       <Button colorScheme="teal" onClick={onOpen}>
-        Create Room
+        Create private room
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>

@@ -43,7 +43,7 @@ import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import swal from 'sweetalert';
-import {  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, FormControl, FormLabel } from '@chakra-ui/react';
+import {  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, FormControl, FormLabel} from '@chakra-ui/react';
 
 const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
@@ -123,7 +123,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
      const { colorMode, toggleColorMode } = useColorMode()
        const handleCreateRoom = () => {
         const randomString = Math.random().toString(36).substring(7);
-          const link = `https://mycrush.vercel.app/omegle?roomID=${randomString}`;
+       
+          const link = `https://univibe.fun/omegle?roomID=${randomString}`
     // Replace this with your actual logic for creating a room
     console.log('Room created!');
      window.location.href = link;
@@ -173,7 +174,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         <Modal isOpen={isOpen} onClose={onRoomClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Room is created</ModalHeader>
+            <ModalHeader>Private room is created</ModalHeader>
             <ModalBody>
               
               <Box>
@@ -234,10 +235,18 @@ const SidebarWithHeader = () => {
 
   const [roomName, setRoomName] = useState('');
   const [user, setUser] = useState([]);
-  const [loading,setLoading] = useState(false)
-        const myRollnumber = localStorage.getItem('rollNumber');
-        const databaseInstance = getDatabase();
-  
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const myRollnumber = localStorage.getItem('rollNumber');
+  const databaseInstance = getDatabase();
+    const filteredUsers = user.filter(userData =>
+    userData.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+      const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   useEffect(() => {
       const keyRef = ref(databaseInstance, `match/${myRollnumber}`);
    get(keyRef).then((snapshot)=>{
@@ -245,7 +254,7 @@ const SidebarWithHeader = () => {
     swal("Hey dont forget you got a match")
    }
    })
-  
+
     const userRef = ref(database, 'servers');
     setLoading(true)
     get((userRef))
@@ -300,11 +309,23 @@ const SidebarWithHeader = () => {
           {/* mobilenav */}
           <MobileNav onOpen={onOpen} />
 <Box ml={{ base: 0, md: 60 }} p="4">
-  <Flex direction="row" justifyContent="center" alignItems="center" flexWrap="wrap" gap={5}>
-    {user.map((classData, index) => (
-      <DiscordCard key={index} id={classData} />
-    ))}
-  </Flex>
+  <Flex direction="column" alignItems="center">
+              {/* Search Bar */}
+              <FormControl mb={4} bg="white" border="1px solid black" borderRadius="md">
+                <Input
+                  type="text"
+                  placeholder="Search for servers..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  color={'black'}
+                />
+              </FormControl>
+              <Flex direction="row" justifyContent="center" alignItems="center" flexWrap="wrap" gap={5}>
+                {filteredUsers.map((classData, index) => (
+                  <DiscordCard key={index} id={classData} />
+                ))}
+              </Flex>
+            </Flex>
 </Box>
 
 
