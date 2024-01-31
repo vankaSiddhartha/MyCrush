@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { auth, provider } from "../firebase";
 import { signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
 import {
   Button,
@@ -12,49 +13,12 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
-
+import { jwtDecode } from "jwt-decode";
 export default function Landing() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  function isBusinessEmail(email) {
-    const businessDomains = [ 'anits.edu.in', 'nitw.ac.in','gitam.edu'];
-    const [, domain] = email.split('@');
-
-    if (!businessDomains.includes(domain)) {
-      window.alert("Use college mail");
-      setIsLoading(false)
-    } else {
-      localStorage.setItem("email", email);
-      setIsLoading(false)
-       navigate("/auth")
-      
-      
-    }
-  }
-
-  useEffect(() => {
-    
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setValue(user.email);
-        localStorage.setItem("name",user.displayName)
-        localStorage.setItem("profile",user.photoURL)
-        localStorage.setItem("uid",user.uid)
-        
-      
-       
-
-
-        isBusinessEmail(user.email);
-      }
-    
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleClick = () => {
     setIsLoading(true);
@@ -95,17 +59,22 @@ export default function Landing() {
             <Text>Use college mail</Text>
           </Heading>
               <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <Button
-              rounded={'full'}
-              bg={'blue.400'}
-              color={'white'}
-             onClick={handleClick}
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              Create Account
-            </Button>
-            <Button rounded={'full'} onClick={handleClick} >Login Account</Button>
+        <GoogleLogin
+  onSuccess={credentialResponse => {
+    
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log(decoded);
+        localStorage.setItem("name",decoded.name)
+        localStorage.setItem("profile",decoded.picture)
+        localStorage.setItem("uid",decoded.jti)
+         localStorage.setItem("email", decoded.email);
+         navigate("/auth")
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>;
+            
           </Stack>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
             
