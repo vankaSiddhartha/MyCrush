@@ -255,7 +255,7 @@ const SidebarWithHeader = () => {
    }else{
     swal({
       text:"Ignore this message if you dont register to CrushMatch",
-      title: "No responce from your crush but no worries, increse your crush list to increse the probability to get valentinens date"
+      title: "Increase your crush list to increase the probability of getting valentines date"
     })
 
    }
