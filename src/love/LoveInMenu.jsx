@@ -76,6 +76,7 @@ const LoveInMenu = () => {
   };
 
   return (
+    <>
     <Box
       background="#FF167C"
       w="100%"
@@ -88,6 +89,7 @@ const LoveInMenu = () => {
       alignItems="center"
       justifyContent="center"
     >
+
       {isLoading ? (
         <Flex align="center" justify="center" direction="column">
           <ClimbingBoxLoader />
@@ -96,11 +98,11 @@ const LoveInMenu = () => {
       ) : (
         <Box
           p={8}
-          backdropFilter="blur(8px)"
+          backdropFilter="blur(50px)"
           backgroundColor="rgba(255, 22, 124, 0.5)"
         >
           <Heading mb={4}>Send secretly🫣 end to end encrypted</Heading>
-          <Text>Increase your chances of finding a match by adding more crushes.</Text><br></br>
+          <Text fontSize={18}>We've created a feature where you can add your crush to a list, and if the feeling is mutual and your crush adds you back, you'll be notified. Until then, your crush list remains confidential with us, it's fun way to increase your chances of finding a match by adding more crushes.</Text><br></br>
 
           <FormControl mb={4}>
             <FormLabel>Crush Roll number</FormLabel>
@@ -117,6 +119,7 @@ const LoveInMenu = () => {
         </Box>
       )}
     </Box>
+    </>
   );
 };
 
