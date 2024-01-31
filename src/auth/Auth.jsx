@@ -117,8 +117,10 @@ export default function Auth() {
               <FormLabel>College</FormLabel>
               <Select value={college} onChange={(e) => setCollege(e.target.value)} >
                 <option value="ANITS">ANITS</option>
+                <option value="NITW">NITW</option>
                 <option value="LPU">LPU</option>
                 <option value="GITAM">GITAM</option>
+            
               </Select>
             </FormControl>
             <Stack spacing={10}>
