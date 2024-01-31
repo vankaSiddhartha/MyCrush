@@ -248,7 +248,7 @@ const SidebarWithHeader = () => {
   
     const userRef = ref(database, 'servers');
     setLoading(true)
-    get(query(userRef,limitToFirst(2)))
+    get((userRef))
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
@@ -299,13 +299,16 @@ const SidebarWithHeader = () => {
           </Drawer>
           {/* mobilenav */}
           <MobileNav onOpen={onOpen} />
-          <Box ml={{ base: 0, md: 60 }} p="4">
-            <Flex flexWrap="wrap" gap={10}>
-              {user.map((classData, index) => (
-                <DiscordCard key={index} id={classData} />
-              ))}
-            </Flex>
-          </Box>
+<Box ml={{ base: 0, md: 60 }} p="4">
+  <Flex direction="row" justifyContent="center" alignItems="center" flexWrap="wrap" gap={5}>
+    {user.map((classData, index) => (
+      <DiscordCard key={index} id={classData} />
+    ))}
+  </Flex>
+</Box>
+
+
+
         </>
       )}
     </Box>

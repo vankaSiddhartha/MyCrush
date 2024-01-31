@@ -99,7 +99,7 @@ const LoveInMenu = () => {
           backdropFilter="blur(8px)"
           backgroundColor="rgba(255, 22, 124, 0.5)"
         >
-          <Heading mb={4}>Send secretly🫣</Heading>
+          <Heading mb={4}>Send secretly🫣 end to end encrypted</Heading>
           <Text>Increase your chances of finding a match by adding more crushes.</Text><br></br>
 
           <FormControl mb={4}>
