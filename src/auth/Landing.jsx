@@ -92,6 +92,7 @@ export default function Landing() {
             <Text color={'pink.400'} as={'span'}>
               Elevate Your College Experience – Learn, Enjoy, Socialize!😜
             </Text>{' '}
+            <Text>Use college mail</Text>
           </Heading>
               <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button

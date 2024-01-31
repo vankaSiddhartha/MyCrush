@@ -11,6 +11,7 @@ import {
 import { getDatabase, ref, get, set } from 'firebase/database';
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 import { Resend } from 'resend';
+import { Text } from '@chakra-ui/react';
 import swal from 'sweetalert';
 
 const LoveInMenu = () => {
@@ -99,11 +100,12 @@ const LoveInMenu = () => {
           backgroundColor="rgba(255, 22, 124, 0.5)"
         >
           <Heading mb={4}>Send secretly🫣</Heading>
+          <Text>Increase your chances of finding a match by adding more crushes.</Text><br></br>
 
           <FormControl mb={4}>
             <FormLabel>Crush Roll number</FormLabel>
             <Input
-              placeholder="text"
+              placeholder="Roll number"
               value={crushRollNumber}
               onChange={(e) => setCrushRollNumber(e.target.value)}
             />
