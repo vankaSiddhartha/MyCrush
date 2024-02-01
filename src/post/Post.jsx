@@ -25,6 +25,10 @@ import {
   MenuList,
   background,
 } from '@chakra-ui/react'
+import { v4 as uuidv4 } from 'uuid';
+import { getDatabase, ref, get, set, limitToLast, query } from 'firebase/database';
+import { orderByChild } from 'firebase/database';
+import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 import {
   FiHome,
   FiTrendingUp,
@@ -36,19 +40,21 @@ import {
   FiChevronDown,
 } from 'react-icons/fi'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import LoveInMenu from './LoveInMenu'
-import { GiLoveLetter } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
 import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
-
+import UploadPost from './UploadPost';
+import PostComponent from './PostComponent';
+import { useEffect,useState } from 'react';
+import { ConsoleLevel } from '@zegocloud/zego-uikit-prebuilt';
+import { GiLoveLetter } from "react-icons/gi";
 
 
 const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
-  {name:'Conffesions',icon:GiLoveLetter,link:'/post'}
+    {name:'Conffesions',icon:GiLoveLetter,link:'/post'}
   
 ]
 
@@ -186,11 +192,37 @@ const MobileNav = ({ onOpen, ...rest }) => {
   )
 }
 
-const Love = () => {
+const Post = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+   const [user, setUser] = useState([]);
+    const randomUUID = uuidv4();
+     
+    const databaseInstance = getDatabase();
+
+    const link = `post`
+     const userRef = ref(databaseInstance, link);
+    
+     const refQuery = query(userRef,limitToLast(20))
+  useEffect(()=>{
+    get(refQuery)
+    .then((snapshot)=>{
+       const userData = snapshot.val();
+       console.log(userData)
+          const userList = Object.entries(userData).map(([userId, userDetails]) => ({
+            post:userDetails.post,
+            id:userDetails.id,
+            author:userDetails.author,
+            time:userDetails.time
+
+          }))
+           const sortedPosts = userList.sort((a, b) => new Date(b.time) - new Date(a.time));
+           setUser(sortedPosts);
+    })
+  },[])
+
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('#FF167C', '#FF167C') }>
+    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
@@ -203,13 +235,19 @@ const Love = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
+     
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-       <LoveInMenu/>
+      <UploadPost/>
+       {user.map((character, index) => (
+          <PostComponent
+            key={index}
+            id = {character}
+          />
+        ))}
       </Box>
     </Box>
   )
 }
 
-export default Love
+export default Post

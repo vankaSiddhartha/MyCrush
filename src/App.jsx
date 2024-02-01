@@ -9,6 +9,8 @@ import Auth from './auth/Auth';
 import Love from './love/Love';
 import Match from './love/Match';
 import CreatePrivateRoom from './home/CreatePrivateRoom';
+import Post from './post/Post';
+import UploadPost from './post/UploadPost';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/love' element={<Love/>}/>
           <Route path='/match' element={<Match/>}/>
+          <Route path='/post' element ={<Post/>}/>
+          <Route path='/uploadPost' element={<UploadPost/>}/>
           <Route path='/custumRoom'element={<CreatePrivateRoom/>}/>
         </Routes>
       </Router>
