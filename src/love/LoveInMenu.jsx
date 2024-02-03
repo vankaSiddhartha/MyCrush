@@ -112,7 +112,7 @@ const LoveInMenu = () => {
           <FormControl mb={4}>
             <FormLabel>Crush Roll number</FormLabel>
             <Input
-              placeholder="Roll number"
+              placeholder="eg A21126510193"
               value={crushRollNumber.trim()}
               onChange={(e) => setCrushRollNumber(e.target.value)}
             />
