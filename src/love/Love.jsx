@@ -45,7 +45,7 @@ import { SiLivechat } from "react-icons/si";
 
 
 const LinkItems = [
-  { name: 'Live Chat', icon: SiLivechat,link:'/' },
+  { name: 'Live Chat', icon: SiLivechat,link:'/home' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
   {name:'Conffesions',icon:GiLoveLetter,link:'/post'}

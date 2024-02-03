@@ -46,7 +46,7 @@ import swal from 'sweetalert';
 import {  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, FormControl, FormLabel} from '@chakra-ui/react';
 import { GiLoveLetter } from "react-icons/gi";
 const LinkItems = [
-  { name: 'Live Chat', icon: SiLivechat,link:'/' },
+  { name: 'Live Chat', icon: SiLivechat,link:'/home' },
   { name: 'Crush Matching', icon: FaHeart,link:'/love' },
   { name: 'My Matchs', icon: FaFaceKissWinkHeart,link:'/match' },
     {name:'Conffesions',icon:GiLoveLetter,link:'/post'}

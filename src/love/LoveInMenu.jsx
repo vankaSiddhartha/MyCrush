@@ -107,7 +107,7 @@ const LoveInMenu = () => {
           backgroundColor="rgba(255, 22, 124, 0.5)"
         >
           <Heading mb={4}>Send secretly🫣 end to end encrypted</Heading>
-          <Text fontSize={18}>We've created a feature where you can add your crush to a list, and if the feeling is mutual and your crush adds you back, you'll be notified. Until then, your crush list remains confidential with us, it's fun way to increase your chances of finding a match by adding more crushes.</Text><br></br>
+          <Text fontSize={18}>Our new feature allows you to add your crush secretly without them knowing. If your crush also adds you, you'll be matched!, it's fun way and to increase your chances of finding a match by adding more crushes.</Text><br></br>
 
           <FormControl mb={4}>
             <FormLabel>Crush Roll number</FormLabel>

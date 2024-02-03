@@ -21,7 +21,7 @@ function App() {
       <Router>
         
         <Routes>
-          <Route path='/' element={isLogin ? (<Home />) : (<Landing />)} />
+          <Route path='/' element={isLogin ? (<Love/>) : (<Landing />)} />
           <Route path='/auth' element={isLogin ? (<Home />) : (<Auth />)} />
           <Route path='/dating' element={<Advanced />} />
           <Route path='/omegle' element={<Omegle />} />
