@@ -41,8 +41,9 @@ import { GiLoveLetter } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
 import { FaFaceKissWinkHeart } from "react-icons/fa6";
 import { SiLivechat } from "react-icons/si";
-
-
+import { useEffect } from 'react'
+import { ref, get,limitToFirst ,query,getDatabase} from 'firebase/database';
+import swal from 'sweetalert';
 
 const LinkItems = [
   { name: 'Live Chat', icon: SiLivechat,link:'/home' },
@@ -187,7 +188,24 @@ const MobileNav = ({ onOpen, ...rest }) => {
 }
 
 const Love = () => {
+    const myRollnumber = localStorage.getItem('rollNumber');
+    const databaseInstance = getDatabase();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  useEffect(()=>{
+        const keyRef = ref(databaseInstance, `match/${myRollnumber}`);
+   get(keyRef).then((snapshot)=>{
+      if(snapshot.exists()){
+    swal("Hey dont forget you got a match")
+   }else{
+    swal({
+      text:"Ignore this message if you dont register to CrushMatch",
+      title: "Increase your crush list to increase the probability of getting valentines date"
+    })
+
+  
+   }
+  })
+})
 
   return (
     <Box minH="100vh" bg={useColorModeValue('#FF167C', '#FF167C') }>
