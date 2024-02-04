@@ -202,23 +202,34 @@ const Post = () => {
     const link = `post`
      const userRef = ref(databaseInstance, link);
     
-     const refQuery = query(userRef,limitToLast(20))
-  useEffect(()=>{
+     const refQuery = query(userRef,limitToLast(30))
+ useEffect(() => {
+  function fetchData() {
     get(refQuery)
-    .then((snapshot)=>{
-       const userData = snapshot.val();
-       console.log(userData)
-          const userList = Object.entries(userData).map(([userId, userDetails]) => ({
-            post:userDetails.post,
-            id:userDetails.id,
-            author:userDetails.author,
-            time:userDetails.time
+      .then((snapshot) => {
+        const userData = snapshot.val();
 
-          }))
-           const sortedPosts = userList.sort((a, b) => new Date(b.time) - new Date(a.time));
-           setUser(sortedPosts);
-    })
-  },[])
+        if (userData) {
+          const userList = Object.entries(userData).map(([userId, userDetails]) => ({
+            post: userDetails.post,
+            id: userDetails.id,
+            author: userDetails.author,
+            time: userDetails.time
+          }));
+
+          const sortedPosts = userList.sort((a, b) => new Date(b.time) - new Date(a.time));
+          setUser(sortedPosts);
+           setTimeout(fetchData, 5000);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  fetchData();
+}, [/* Add dependencies if needed */]);
+
 
 
   return (

@@ -45,7 +45,7 @@ const UploadPost = () => {
       time:currentDateTime.toLocaleString('en-IN')
      }).then(()=>{
      swal({title:"Good Job"})
-        window.location.href = 'https://www.univibe.fun/post';
+       // window.location.href = 'https://www.univibe.fun/post';
       
      })
     }
